@@ -66,15 +66,14 @@ if ($blocks_enabled == 1) {
             $block_loop++;
             
             } // END BLOCK LOOP
-            
-    // echo '<p>Block Loop 1 got '.$activecol1.'</p>'; // Col Count Checker for Loop 1
-    // echo '<p>Block Loop 2 got '.$activecol2.'</p>'; // Col Count Checker for Loop 2
     
     $block_loop = 1; // resets block loop count
     
     while ($block_loop <= 2) { 
                 
                 if ($block_loop == 1) { $currentcol = $activecol1; } else { $currentcol = $activecol2; }
+                
+                if($currentcol > 0) { // additional check: if there are active coloumns in the first/second block, then display.
                 
                 $blockbg = 'blockbg_'.$block_loop;
                 $bgid = get_field($blockbg);
@@ -121,11 +120,13 @@ if ($blocks_enabled == 1) {
                                         $existname = 'existing_content_'.$block_loop.'_'.$col_loop;
                                         $existval = get_field($existname);
                                         $postob = get_post($existval[0]);
+                                        $titleattr = the_title_attribute( array('echo' => 0, 'post' => $existval[0] ));
                                         $posttitle = get_the_title($existval[0]);
                                         $postimg = get_the_post_thumbnail($existval[0], 'thumb-medium');
                                         $posturl = get_the_permalink($existval[0]);
                                         $postexc = wp_trim_words( $postob->post_content, 30 );
                                         ?>
+                                        
                                         <div class="single-block existing">
                                            <div class="zoom">
                                                 <a href="<?php echo $posturl; ?>">
@@ -133,8 +134,9 @@ if ($blocks_enabled == 1) {
                                                 </a>
                                                 <div class="zoom-icon"></div>
                                             </div>
+                                            <?php echo '<h1>'.$posttitle.'</h1>'; ?>
                                             <?php echo '<p>'.$postexc.'</p>'; // Display the post Excerpt ?>
-                                            <a class="block-more" href="<?php echo $posturl; ?>" title="<?php echo $posttitle; ?>">MORE INFO</a>
+                                            <a class="block-more" href="<?php echo $posturl; ?>" title="<?php echo $titleattr; ?>">MORE INFO</a>
                                         </div><?php
                                     }            
                                 
@@ -144,7 +146,9 @@ if ($blocks_enabled == 1) {
                     ?>
                 </div> <!-- INNER WRAPPER END -->
             </div> <!--- BLOCK DIV END -->
-        <?php $block_loop++;
+        <?php
+        } 
+        $block_loop++;
     } // END BLOCK LOOP
 } // END BLOCK_ENABLED CHECK (IF)
 ?>   

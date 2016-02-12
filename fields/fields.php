@@ -1,4 +1,7 @@
 <?php 
+
+/** These field are generated via the Advanced Custom Field 4 FREE plugin by Elliot Condon **/
+
 if(function_exists("register_field_group"))
 {
 	register_field_group(array (
@@ -42,7 +45,7 @@ if(function_exists("register_field_group"))
 				'label' => 'Block 1 Background',
 				'name' => 'blockbg_1',
 				'type' => 'image',
-				'instructions' => 'Upload here an image to be used as background image when scrolling the block. If not set, the background defaults to light gray. <strong>Suggested format, size: SVG or JPG, 1366px min.</strong>',
+				'instructions' => 'Upload here an image to be used as background image when scrolling the block. If not set, the background defaults to the coloured triangle-base pattern. <strong>Suggested format, size: SVG or JPG, 1366 x 660px min. (bigger images will be resized accordingly)</strong>',
 				'conditional_logic' => array (
 					'status' => 1,
 					'rules' => array (
