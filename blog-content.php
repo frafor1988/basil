@@ -8,18 +8,18 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
 
 if ( has_post_thumbnail() ) {
     
   $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'big' ); ?>
   
-    <div class="block" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center; padding-top: 23vh;"> 
+    <div class="block" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center; padding-top: 15vh;"> 
 
 <?php } else { ?>
     
-    <div class="block" style="background: #ccc url('<?php the_default_bg(); ?>') no-repeat fixed center center; padding-top: 23vh;">
+    <div class="block" style="background: #ccc url('<?php the_default_bg(); ?>') no-repeat fixed center center; padding-top: 15vh;">
     
     <?php } ?>
         <header class="entry-header">
@@ -49,4 +49,4 @@ if ( has_post_thumbnail() ) {
         
 	</div><!-- .site-main -->
 
-</div><!-- block --->
+</div><!-- block -->

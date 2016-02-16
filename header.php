@@ -6,7 +6,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
 
 ?><!DOCTYPE html>
@@ -26,7 +26,7 @@
     <header id="top-header">
 	    <h1 class="top-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 	        			<?php if ( has_nav_menu( 'primary' ) ) : ?>
-							<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php _e( 'Primary Menu', 'basil' ); ?>">
+							<nav id="site-navigation" class="main-navigation" aria-label="<?php _e( 'Primary Menu', 'basil' ); ?>">
 								<?php
 									wp_nav_menu( array(
 										'theme_location' => 'primary',
@@ -52,3 +52,9 @@
 			                </div>
 			            <?php } ?>
     </header><!-- .site-header -->
+            <?php if(get_field(seo_text)) { ?>
+                <div class="texteo">
+                    <h1><?php the_title(); ?></h1>
+                    <p><?php the_field(seo_text); ?>
+                </div>
+            <?php } ?>

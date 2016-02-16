@@ -21,7 +21,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
 
 if ( ! function_exists( 'basil_setup' ) ) :
@@ -239,7 +239,7 @@ if( ! class_exists('acf') ) {
         function my_acf_settings_path( $path ) {
          
             // update path
-            $path = get_stylesheet_directory() . '/inc/acf/';
+            $path = get_template_directory() . '/inc/acf/';
             
             // return
             return $path;
@@ -250,25 +250,22 @@ if( ! class_exists('acf') ) {
         function my_acf_settings_dir( $dir ) {
          
             // update path
-            $dir = get_stylesheet_directory_uri() . '/inc/acf/';
+            $dir = get_template_directory() . '/inc/acf/';
             
             // return
             return $dir;
         }   
         
-        // Load only limited functionality
-        //	define( 'ACF_LITE' , true );
-
         // 4. Hide & Include ACF
 		define( 'ACF_LITE', true );
-        include_once( get_stylesheet_directory() . '/inc/acf/acf.php' ); 
+        include_once( get_stylesheet_directory() . '/inc/acf/acf.php' );
 }
 
 /** Default BG IMAGE as a Function **/
 
 function the_default_bg() {
     
-    $imgsrc = get_stylesheet_directory_uri().'/img/pattern.svg';
+    $imgsrc = get_template_directory_uri().'/img/pattern.svg';
  // $imgalt = get_bloginfo( 'name' );
  // $imgtag = "<img class='attachment-thumb-big size-thumb-big wp-post-image' width='1366' height='660' alt='".$imgalt."' src='".$imgsrc."'>";
     
@@ -289,6 +286,23 @@ function new_excerpt_more() {
     return '<a class="block-more" href="' . get_permalink($post->ID) . '" title="' . get_the_title($post->ID) . '" >READ MORE</a>';
 }
 
-include_once( get_stylesheet_directory() . '/fields/fields.php' );
+/** Embedded Shortcodes **/
+
+function action_button($atts, $content = null) {
+   extract(shortcode_atts(array(
+      "text" => "Ooops! Testo non configurato!",
+      "label" => "Ooops! Pulsante non configurato!",
+      "url" => get_site_url(),
+      "target" => _self
+   ), $atts));
+   
+    return "<p class='action-button'>".$text."<a class='block-more' href='".$url."' target='".$target."'>".$label."</a></p>";
+}
+add_shortcode("actionbutton", "action_button");
+
+
+/** ACF Fields include **/
+
+include_once( get_template_directory().'/fields/fields.php' );
 
 ?>

@@ -34,12 +34,12 @@
         
     } // END SIDEBAR COUNTER ?>
     
-    <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>"> <!--- #SIDEBAR-FOOTER START-->
+    <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>"> <!-- #SIDEBAR-FOOTER START-->
     
     <?php if ($sidebar_count != 0 ) { // If there is any sidebar out there, then show it (or them!) ?>
     
         
-            <div class="inblock-wrap"> <!--- INNER WRAPPER START -->
+            <div class="inblock-wrap"> <!-- INNER WRAPPER START -->
                 
                 <?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
                 	<div class="single-block single-sidebar">
@@ -66,19 +66,19 @@
                 <?php endif; ?>            
                 
             
-            </div> <!--- INNER WRAPPER END -->
+            </div> <!-- INNER WRAPPER END -->
     
     <?php   } ?>
     
-    </div> <!--- #SIDEBAR-FOOTER END -->
+    </div> <!-- #SIDEBAR-FOOTER END -->
     
     <footer id="colophon">
         <div class="single-block single-colophon">
-            <?php if ( is_active_sidebar( 'sidebar-5' ) ) : ?>
-            	<?php dynamic_sidebar( 'sidebar-5' ); ?>
+            <?php if ( is_active_sidebar( 'colophon-1' ) ) : ?>
+            	<?php dynamic_sidebar( 'colophon-1' ); ?>
             <?php else : ?>
                 <p class="credits">
-                    Basil, an awesome open-source theme by ffd-web, is released under GPLv2 license.</br>
+                    Basil, an awesome open-source theme by ffd-web, is released under GPLv2 license.<br />
                     <span style="font-style: italic;">Open Source Matters</span>
                 </p>
             <?php endif; ?>

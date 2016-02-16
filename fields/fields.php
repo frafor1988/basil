@@ -1,7 +1,6 @@
 <?php 
 
 /** These field are generated via the Advanced Custom Field 4 FREE plugin by Elliot Condon **/
-
 if(function_exists("register_field_group"))
 {
 	register_field_group(array (
@@ -74,7 +73,7 @@ if(function_exists("register_field_group"))
 				),
 				'other_choice' => 0,
 				'save_other_choice' => 0,
-				'default_value' => 'No',
+				'default_value' => 0,
 				'layout' => 'horizontal',
 			),
 			array (
@@ -182,7 +181,7 @@ if(function_exists("register_field_group"))
 				),
 				'other_choice' => 0,
 				'save_other_choice' => 0,
-				'default_value' => 'No',
+				'default_value' => 0,
 				'layout' => 'horizontal',
 			),
 			array (
@@ -290,7 +289,7 @@ if(function_exists("register_field_group"))
 				),
 				'other_choice' => 0,
 				'save_other_choice' => 0,
-				'default_value' => 'No',
+				'default_value' => 0,
 				'layout' => 'horizontal',
 			),
 			array (
@@ -398,7 +397,7 @@ if(function_exists("register_field_group"))
 				),
 				'other_choice' => 0,
 				'save_other_choice' => 0,
-				'default_value' => 'No',
+				'default_value' => 0,
 				'layout' => 'horizontal',
 			),
 			array (
@@ -544,7 +543,7 @@ if(function_exists("register_field_group"))
 				),
 				'other_choice' => 0,
 				'save_other_choice' => 0,
-				'default_value' => 'No',
+				'default_value' => 0,
 				'layout' => 'horizontal',
 			),
 			array (
@@ -652,7 +651,7 @@ if(function_exists("register_field_group"))
 				),
 				'other_choice' => 0,
 				'save_other_choice' => 0,
-				'default_value' => 'No',
+				'default_value' => 0,
 				'layout' => 'horizontal',
 			),
 			array (
@@ -752,7 +751,7 @@ if(function_exists("register_field_group"))
 				'label' => 'Activate Column 3?',
 				'name' => 'activate_column_2_3',
 				'type' => 'radio',
-				'instructions' => 'Activates Column 2',
+				'instructions' => 'Activates Column 3',
 				'required' => 1,
 				'choices' => array (
 					1 => 'Yes',
@@ -760,7 +759,7 @@ if(function_exists("register_field_group"))
 				),
 				'other_choice' => 0,
 				'save_other_choice' => 0,
-				'default_value' => 'No',
+				'default_value' => 0,
 				'layout' => 'horizontal',
 			),
 			array (
@@ -868,7 +867,7 @@ if(function_exists("register_field_group"))
 				),
 				'other_choice' => 0,
 				'save_other_choice' => 0,
-				'default_value' => 'No',
+				'default_value' => 0,
 				'layout' => 'horizontal',
 			),
 			array (
@@ -994,6 +993,7 @@ if(function_exists("register_field_group"))
 	));
 }
 
+
 if(function_exists("register_field_group"))
 {
 	register_field_group(array (
@@ -1038,6 +1038,57 @@ if(function_exists("register_field_group"))
 		),
 		'options' => array (
 			'position' => 'acf_after_title',
+			'layout' => 'default',
+			'hide_on_screen' => array (
+			),
+		),
+		'menu_order' => 0,
+	));
+}
+
+
+if(function_exists("register_field_group"))
+{
+	register_field_group(array (
+		'id' => 'acf_hidden-seo-text',
+		'title' => 'Hidden SEO Text',
+		'fields' => array (
+			array (
+				'key' => 'field_56c2fe64f6f79',
+				'label' => 'Seo Text',
+				'name' => 'seo_text',
+				'type' => 'textarea',
+				'instructions' => 'SEO is nice: optimize your website content to fit Google\'s need and, with it, those of other search engines. However, sometimes SEO requirements battle with esthetics and layout. This text is useful to overcome these issues, as it\'s hidden to the users via CSS, but it remains readable by search spiders: in this way you can easily reach the suggested <strong>300 words minimum</strong> requirement for your page, without compromising the straightforward and extremely neat layout of the Basil theme!<br />
+	<span style="color: red; font-weight: bold">Please note: write this text with an eye to keyword and/or keyphrases, but always check key density, and <u>write it as you\'d write to humans</u> otherwise Google will notice that it\'s just a nonsense text block!</span>',
+				'default_value' => '',
+				'placeholder' => '',
+				'maxlength' => '',
+				'rows' => 4,
+				'formatting' => 'none',
+			),
+		),
+		'location' => array (
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'post',
+					'order_no' => 0,
+					'group_no' => 0,
+				),
+			),
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'page',
+					'order_no' => 0,
+					'group_no' => 1,
+				),
+			),
+		),
+		'options' => array (
+			'position' => 'normal',
 			'layout' => 'default',
 			'hide_on_screen' => array (
 			),

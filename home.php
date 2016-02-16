@@ -9,7 +9,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
 
 get_header(); ?>
@@ -32,7 +32,14 @@ get_header(); ?>
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
 				get_template_part('blog-content');
-
+				
+				// If comments are open or we have at least one comment, load up the comment template.
+				if (is_single()) {
+        			if ( comments_open() || get_comments_number() ) {
+        				comments_template();
+        			}
+				}
+				
 			// End the loop.
 			endwhile;
 

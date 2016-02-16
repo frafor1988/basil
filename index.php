@@ -8,7 +8,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
 
 get_header(); ?>
@@ -20,7 +20,7 @@ get_header(); ?>
         
         <div class="block">
 	
-		<main id="single-content" class="inblock-wrap" role="main">
+		<main id="single-content" class="inblock-wrap">
 
 		<?php if ( have_posts() ) : ?>
 
@@ -44,10 +44,10 @@ get_header(); ?>
 
 		endif;
 		?>
-
+            
 		</main><!-- .site-main -->
 	
-	</div><!-- block --->
+	</div><!-- block -->
 	<?php
 		if (!is_archive()) {
 				    get_template_part('blocks');

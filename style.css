@@ -4,7 +4,7 @@ Theme URI:
 Author: ffd
 Author URI: http://ffd-web.com/
 Description: Basil is a basic modern theme for Wordpress, easy to use and cool looking
-Version: 0.1
+Version: 0.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: green, gray, white, light, one-column, two-columns, three-columns, four-columns, responsive-layout, custom-menu, featured-images
@@ -28,7 +28,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
  * 7.0 - Content
  *   7.1 - Blocks
  *   7.2 - Block coloumns
+ *   7.3 - Shortcodes
  * 8.0 - Blog & Single Page Layout
+     8.1 - Comments
  * 9.0 - Archive & Category Layout
  * 10.0 - Footer, Widget & Colophon
  * 11.0 - Pagination
@@ -290,7 +292,7 @@ h6 {
     line-height: 2;
 	clear: both;
 	font-weight: 300;
-	margin: 0;
+	margin: 0 0 0.75em 0;
 	text-rendering: optimizeLegibility;
 }
 
@@ -299,7 +301,6 @@ h1 {
 	clear: both;
 	font-weight: bold;
 	text-transform: uppercase;
-	margin: 0 0 0.5em 0;
 	text-rendering: optimizeLegibility;
 }
 
@@ -630,11 +631,11 @@ input[type="number"],
 textarea {
 	background: #f7f7f7;
 	background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
-	border: 1px solid #d1d1d1;
-	border-radius: 2px;
+	border: 0;
 	color: #686868;
 	padding: 0.625em 0.4375em;
 	width: 100%;
+	transition: 0.5s;
 }
 
 input[type="text"]:focus,
@@ -646,7 +647,6 @@ input[type="tel"]:focus,
 input[type="number"]:focus,
 textarea:focus {
 	background-color: #fff;
-	border-color: #0c0c0c;
 	color: #0c0c0c;
 	outline: 0;
 }
@@ -686,17 +686,17 @@ form {
 
 .search-form {
 	position: relative;
+	padding-top: 0;
 }
 
 input[type="search"].search-field {
-	border-radius: 2px 0 0 2px;
-	width: 70%;
+	border-radius: 0;
 }
 
 .search-submit {
     content: "\f400";
     font-family: "Genericons";
-	border-radius: 0 2px 2px 0;
+	border-radius: 0;
 	bottom: 0;
 	overflow: hidden;
 	padding: 0;
@@ -1070,11 +1070,36 @@ a:active {
     max-width: 650px;
 }
 
+/** 7.3 Shortcodes **/
+
+.action-button {
+    background: #c1da7f none repeat scroll 0 0;
+    color: #fff;
+    font-size: 24px;
+    margin-top: 3em !important;
+    padding: 3%;
+    text-align: center;
+}
+
+.action-button .block-more {
+    border: 2px solid #fff;
+    display: inline;
+    font-weight: 500;
+    margin-left: 45px;
+    padding: 10px 25px;
+    position: relative;
+    transition: 0.5s;
+}
+
+.action-button .block-more:hover {
+    border: 5px solid #FFF;
+}
+
 /** 8.0 Blog Page - Layout **/
 
 .blog .entry-header, .archive .entry-header, .single .entry-header, .search .entry-header {
     margin-bottom: 150px;
-    margin-bottom: 22vh;
+    margin-bottom: 15vh;
 }
 
 .blog .block:first-child {
@@ -1094,6 +1119,62 @@ a:active {
 
 .the-meta a:hover {
     text-decoration: underline;
+}
+
+/** 8.1 Comments **/
+
+#comments {
+    padding: 32px 10%;
+    clear: both;
+    background-color:  #c1da7f;
+}
+
+#comments a {
+    color: #0c0c0c;
+}
+
+#comments a:hover {
+    text-decoration: underline;
+}
+
+.comment-body {
+    background: #96b34b none repeat scroll 0 0;
+    color: #fff;
+    padding: 2%;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.comment-body p {
+    margin-bottom: 0.5em;
+}
+
+#comments .comment-body a {
+    color: #FFF;
+}
+
+.comment-list {
+    display: inline-block;
+    list-style-type: square;
+    width: 100%;
+}
+
+.children {
+    list-style-type: circle;
+}
+
+.comment-metadata {
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+#reply-title {
+    margin-bottom: 0;
+}
+
+#commentform {
+    padding-top: 0;
 }
 
 /** 9.0 Archives **/
@@ -1153,6 +1234,10 @@ a:active {
 .credits {
     margin-top: 23vh;
     width: 100%;
+}
+
+.texteo {
+    display: none;
 }
     
 /** 11. PAGE NAVIGATION **/

@@ -13,7 +13,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
 
 $blocks_enabled = get_field('activate_blocks');
@@ -80,12 +80,12 @@ if ($blocks_enabled == 1) {
                 $bgurl = wp_get_attachment_image_src($bgid, 'thumb-big');
                                 
                 if ( $bgurl ) { ?>
-                        <div class="block col-<?php echo $currentcol; ?>" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center; padding-top: 300px;"> <!--- BLOCK START -->
+                        <div class="block col-<?php echo $currentcol; ?>" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center; padding-top: 300px;"> <!-- BLOCK START -->
                 <?php 
                 } else { ?>
             
-            <div class="block col-<?php echo $currentcol; ?>"> <!--- BLOCK START --> <?php } ?>
-                <div class="inblock-wrap flex-<?php echo $currentcol; ?>"> <!--- INNER WRAPPER -->
+            <div class="block col-<?php echo $currentcol; ?>"> <!-- BLOCK START --> <?php } ?>
+                <div class="inblock-wrap flex-<?php echo $currentcol; ?>"> <!-- INNER WRAPPER -->
                     <?php
                     
                     $col_loop = 1;
@@ -145,7 +145,7 @@ if ($blocks_enabled == 1) {
                     } // END COL LOOP
                     ?>
                 </div> <!-- INNER WRAPPER END -->
-            </div> <!--- BLOCK DIV END -->
+            </div> <!-- BLOCK DIV END -->
         <?php
         } 
         $block_loop++;

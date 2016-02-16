@@ -12,7 +12,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
  
                         $eocname = 'eoc_'.$block_loop.'_'.$col_loop;
