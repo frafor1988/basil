@@ -24,6 +24,26 @@ All these features are included from v.0.2
 * Post & Page editing is easy and straightforward: just read and fill the forms as you wish
 * Works beautifully with Contact Form 7 to create awesome one-page forms
 
+Shortcodes
+----------
+
+For now, Basil integrates only this shortcode:
+
+### ACTIONBUTTON: useful Call To Action creator
+
+The `[actionbutton]` is meant to create useful Call To Action in any kind of WYSIWYG editor within post or pages (or cpts).
+
+It accepts several arguments:
+
+`text` is the text to show before your Call To Action button, defaults to nonsense text
+`label` is the label on the Call To Action button, defaults to nonsense label
+`url` is the url to point to on click, defaults to `siteurl`
+`target` whether to open url in `_self`, `_blank` or other accepted target values, defaults to `_self`
+
+Example:
+
+`[actionbutton text="Would you like to send an email?" label="Yeah, I really would!" url="http://etcetere.etce" target="_blank"]`
+
 Upcoming features
 -----------------
 
@@ -34,14 +54,7 @@ Basil is a full-featured theme already. However, there is always space for impro
 * Custom Logo selection via the Customizer
 * Custom Color selection via the Customizer
 
-Hopefully, one day we'll see Basil in the official WordPress Theme repo. Still have work to do, though!
-
-Credits
--------
-
-Basil uses [Advanced Custom Fields by Elliot Comdom](http://www.advancedcustomfields.com/) to manage backend UI & Custom Fields
-Some templates and function are inspired by the always wonderful themes made by [The WordPress Team](https://wordpress.org/): twentysixteen & twentyfifteen
-The default background ( pattern.svg ) was generated with [triangligy.js](https://github.com/qrohlf/trianglify)
+Hopefully, one day we'll see Basil in the official WordPress Theme repo. Still have work to do!
 
 Site Demo
 ---------
@@ -54,3 +67,10 @@ Sites using Basil
 Hope to see this list growing fast... just like basil do!
 
 * [NSWD](http://nonsolowebdesign.com)
+
+Credits
+-------
+
+Basil uses [Advanced Custom Fields by Elliot Comdom](http://www.advancedcustomfields.com/) to manage backend UI & Custom Fields
+Some templates and function are inspired by the always wonderful themes made by [The WordPress Team](https://wordpress.org/): twentysixteen & twentyfifteen
+The default background ( pattern.svg ) was generated with [triangligy.js](https://github.com/qrohlf/trianglify)

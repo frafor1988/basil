@@ -258,7 +258,7 @@ if( ! class_exists('acf') ) {
         
         // 4. Hide & Include ACF
 		define( 'ACF_LITE', true );
-        include_once( get_stylesheet_directory() . '/inc/acf/acf.php' );
+        include_once( get_template_directory() . '/inc/acf/acf.php' );
 }
 
 /** Default BG IMAGE as a Function **/
@@ -296,13 +296,14 @@ function action_button($atts, $content = null) {
       "target" => _self
    ), $atts));
    
-    return "<p class='action-button'>".$text."<a class='block-more' href='".$url."' target='".$target."'>".$label."</a></p>";
+    return "<span class='action-wrap'><div class='action-left'><span class='right-arrow'></span><span class='action-text'>".$text."</span></div><div class='action-right'><span class='action-button'><a class='block-more' href='".$url."' target='".$target."'>".$label."</a></span></div></span>";
 }
 add_shortcode("actionbutton", "action_button");
 
 
 /** ACF Fields include **/
 
-include_once( get_template_directory().'/fields/fields.php' );
+// include_once( get_template_directory().'/fields/fields.php' );
+
 
 ?>
