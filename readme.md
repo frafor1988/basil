@@ -7,7 +7,7 @@ It's super-fast, SEO friendly and cool looking and it puts content over layout.
 
 Just upload wonderful pictures, fill in all the form when creating a page or a post and that's it!
 
-No more over-crowded gold-over-plated websites around! Everything needs S P A C E !
+No more over-crowded gold-over-plated websites around! Everything needs S P A C E and S P E E D!
 
 Why Basil? Basil is FRESH, Basil is GOOD, Basil is COOL, Basil is NEAT, Basil is LEAN, Basil is LIGHT. Just like true italian basil!
 
@@ -36,8 +36,11 @@ The `[actionbutton]` is meant to create useful Call To Action in any kind of WYS
 It accepts several arguments:
 
 `text` is the text to show before your Call To Action button, defaults to nonsense text
+
 `label` is the label on the Call To Action button, defaults to nonsense label
+
 `url` is the url to point to on click, defaults to `siteurl`
+
 `target` whether to open url in `_self`, `_blank` or other accepted target values, defaults to `_self`
 
 Example:
@@ -72,5 +75,7 @@ Credits
 -------
 
 Basil uses [Advanced Custom Fields by Elliot Comdom](http://www.advancedcustomfields.com/) to manage backend UI & Custom Fields
+
 Some templates and function are inspired by the always wonderful themes made by [The WordPress Team](https://wordpress.org/): twentysixteen & twentyfifteen
+
 The default background ( pattern.svg ) was generated with [triangligy.js](https://github.com/qrohlf/trianglify)
