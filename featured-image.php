@@ -14,7 +14,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
 
 if ( has_post_thumbnail() ) {

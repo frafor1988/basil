@@ -10,24 +10,10 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
  
 ?>
-
-<script type="text/javascript">
-    
-    $.fn.moreCenter = function() {
-        $(this).each(function() {
-            var sblockWidth = $(this).outerWidth();
-            var moreWidth = $(this).children('a').outerWidth();
-            var moreLeft = (sblockWidth - moreWidth)/2;
-            
-            $(this).children('a').css('left', moreLeft + 'px');
-        });
-    };
-
-</script>
 
 <script type="text/javascript">
  

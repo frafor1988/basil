@@ -7,7 +7,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.1
+ * @since basil 0.2
  */
 ?>
 
@@ -34,7 +34,19 @@
         
     } // END SIDEBAR COUNTER ?>
     
-    <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>"> <!-- #SIDEBAR-FOOTER START-->
+    <?php 
+    
+        $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' );
+                
+        if ( $bgurl ) {         // if $bgurl exist -> so there is a feature image, show it as bg image  ?>
+    
+        <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center;">
+        
+        <?php } else { ?>
+    
+        <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>"> <!-- #SIDEBAR-FOOTER START--> 
+        
+        <?php } ?>
     
     <?php if ($sidebar_count != 0 ) { // If there is any sidebar out there, then show it (or them!) ?>
     

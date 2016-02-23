@@ -29,6 +29,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
  *   7.1 - Blocks
  *   7.2 - Block coloumns
  *   7.3 - Shortcodes
+ *   7.4 - Alignments and Gallery
  * 8.0 - Blog & Single Page Layout
      8.1 - Comments
  * 9.0 - Archive & Category Layout
@@ -603,8 +604,9 @@ input[type="submit"][disabled]:focus {
     margin-top: 34px;
 }
 
-.col-1 div.wpcf7 {
+.col-1 div.wpcf7, #single-content div.wpcf7 {
     padding: 0 7.5%;
+    text-align: center;
 }
 
 button:hover,
@@ -733,6 +735,12 @@ input[type="search"].search-field {
 
 iframe {
     max-width: 100% !important;
+}
+
+#primary iframe {
+    width: 112% !important;
+    max-width: 112% !important;
+    margin: 28px 0 28px -6%;
 }
 
 /**
@@ -922,7 +930,11 @@ a:active {
 
 .inblock-wrap > p, .inblock-wrap > ul, .inblock-wrap > ol, .inblock-wrap > h1, 
 .inblock-wrap > h2, .inblock-wrap > h3, .inblock-wrap > h4, .inblock-wrap > h5, .inblock-wrap > h6,
-.inblock-wrap > blockquote, .inblock-wrap > .the-meta, .col-1 .single-block > p {
+.inblock-wrap > blockquote, .inblock-wrap > .the-meta, .col-1 .single-block > p, .col-1 .single-block > p,
+.col-1 .single-block > ul, .col-1 .single-block > ol, .col-1 .single-block > h1, .col-1 .single-block > h2,
+.col-1 .single-block > h3, .col-1 .single-block > h4, .col-1 .single-block > h5, .col-1 .single-block > h6,
+.col-1 .single-block > blockquote
+{
     padding: 0 7.5%;
 }
 
@@ -937,7 +949,7 @@ a:active {
 .block {
     float: left;
     width: 100%;
-    background: transparent url('img/pattern.svg') fixed top center;
+    background: transparent url('img/pattern.svg') fixed center center;
     padding-top: 140px;
     background-size: auto 100%;
 }
@@ -1070,12 +1082,20 @@ a:active {
 }
 
 .col-2 .single-block {
-    width: 45%;
-    margin-right: 10%;
+    width: 40%;
+    margin-right: 12.5%;
+}
+
+.col-2 .single-block:first-child {
+    margin-left: 2.5%;
 }
 
 .col-2 .single-block:last-child {
-    margin-right: 0;
+    margin-right: 2.5%;
+}
+
+.col-2 .zoom {
+    width: 75%;
 }
 
 .col-1 .single-block {
@@ -1163,15 +1183,21 @@ a:active {
         }
 }
 
-@keyframes bordermorpher {
-    0%      {}
-    50%     {   
-        border-radius: 35px;
-        }
-    100%    {
-        border-radius: 35px;
-    }
+@keyframes rotateblink {
+    
+    0%      { transform: rotate(0); }
+    45%     { transform: rotate(0); }
+    50%     { transform: rotate(-3deg); }
+    55%     { transform: rotate(3deg); }
+    60%     { transform: rotate(-3deg); }
+    65%     { transform: rotate(3deg); }
+    70%     { transform: rotate(-3deg); }
+    75%     { transform: rotate(3deg); }
+    80%     { transform: rotate(-3deg); }
+    85%     { transform: rotate(0deg); }
+    
 }
+    
 
 .action-wrap:hover .right-arrow {
     animation-name: leftright;
@@ -1184,6 +1210,94 @@ a:active {
     background-color: #99BE37;
     box-shadow: 0 0 10px #aaa;
 }
+
+/** 7.4 - Alignments and Gallery **/
+
+.alignleft {
+	float: left;
+	margin: 0.375em 1.75em 1.75em 0;
+}
+
+.alignright {
+	float: right;
+	margin: 0.375em 0 1.75em 1.75em;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
+.gallery {
+	margin: 0 auto 1.75em;
+	padding-top: 28px;
+	width: 98%;
+}
+
+.gallery-item {
+	display: inline-block;
+	max-width: 33.33%;
+	padding: 0 1.1400652% 2.2801304%;
+	text-align: center;
+	vertical-align: top;
+	width: 100%;
+}
+
+.gallery-columns-1 .gallery-item {
+	max-width: 100%;
+}
+
+.gallery-columns-2 .gallery-item {
+	max-width: 50%;
+}
+
+.gallery-columns-4 .gallery-item {
+	max-width: 25%;
+}
+
+.gallery-columns-5 .gallery-item {
+	max-width: 20%;
+}
+
+.gallery-columns-6 .gallery-item {
+	max-width: 16.66%;
+}
+
+.gallery-columns-7 .gallery-item {
+	max-width: 14.28%;
+}
+
+.gallery-columns-8 .gallery-item {
+	max-width: 12.5%;
+}
+
+.gallery-columns-9 .gallery-item {
+	max-width: 11.11%;
+}
+
+.gallery-icon img {
+	margin: 0 auto;
+	width: 100%;
+}
+
+.gallery-caption {
+	color: #686868;
+	display: block;
+	font-size: 13px;
+	font-size: 0.8125rem;
+	font-style: italic;
+	line-height: 1.6153846154;
+	padding-top: 0.5384615385em;
+}
+
+.gallery-columns-6 .gallery-caption,
+.gallery-columns-7 .gallery-caption,
+.gallery-columns-8 .gallery-caption,
+.gallery-columns-9 .gallery-caption {
+	display: none;
+}
+
 
 /** 8.0 Blog Page - Layout **/
 
@@ -1369,31 +1483,27 @@ a.page-numbers:hover {
 /** 11. Media Queries **/
 
 @media screen and (orientation: landscape) {
-    .block {
+    
+    .block, #sidebar-footer, #image-gallery {
         background-size: 100% auto !important;
     }
-    #image-gallery {
-        background-size: 100% auto !important;
-    }
+
 }
 
 @media screen and (orientation: landscape) and (max-width: 1240px) {
     
-    .block {
+    .block, #sidebar-footer, #image-gallery {
         background-size: auto 100% !important;
     }
-    #image-gallery {
-        background-size: auto 100% !important;
-    }
+
 }
 
 @media screen and (orientation: portrait) {
-    .block {
+    
+    .block, #sidebar-footer, #image-gallery {
         background-size: auto 100% !important;
     }
-    #image-gallery {
-        background-size: auto 100% !important;
-    }
+   
 }
 
 @media screen and (min-width: 951px) and (max-width: 1280px) {
@@ -1454,12 +1564,29 @@ a.page-numbers:hover {
         margin-right: 0;
     }
     
+    .action-button, .action-text, .right-arrow {
+        font-size: 21px;
+    }
+    
 }
 
 @media screen and (max-width: 750px) {
     
+    .main-navigation {
+        margin: 3% 0 0 0;
+        width: 100%;
+    }
+    
+    .menu-main-container {
+        text-align: center;
+    }
+    
+    .primary-menu {
+        margin: 0;
+    }
+    
     #primary .inblock-wrap {
-        padding: 60px 7.5%;
+        padding: 60px 0;
     }
     
     .inblock-wrap {
@@ -1480,6 +1607,11 @@ a.page-numbers:hover {
         margin-bottom: 0;
     }
     
+    .col-2 .single-block:first-child, .col-2 .single-block:last-child {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
     .flex-1, .flex-2, .flex-3, .flex-4 {
         display: block;
     }
@@ -1490,7 +1622,48 @@ a.page-numbers:hover {
     
     .zoom {
         margin: 0 auto 9.5%;
+        width: 75%;
     }
     
+    .entry-subtitle {
+        font-size: 23px;
+        margin: 0 5%;
+    }
+
+    .action-left, .action-right {
+        width: 100%;
+        text-align: center;
+        padding: 3%;
+    }
+    
+    .action-text {
+        display: inline-block;
+        animation-name: rotateblink;
+        animation-duration: 2s;
+	    animation-iteration-count: infinite;
+	    animation-timing-function: ease-out;
+    }
+    
+    .action-right {
+        padding-bottom: 6%;
+    }
+    
+    .right-arrow {
+        display: none;
+    }
+    
+    .action-button, .action-text {
+        font-size: 21px;
+        float: none;
+    }
     
 }
+
+@media screen and (max-width: 600px) {
+    
+    .primary-menu li a {
+        font-size: 16px;
+    }
+    
+}
+    

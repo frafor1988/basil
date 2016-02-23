@@ -193,7 +193,7 @@ add_action( 'wp_head', 'basil_javascript_detection', 0 );
 /**
  * Enqueues scripts and styles.
  *
- * @since basil 0.1
+ * @since basil 0.2
  */
 function basil_scripts() {
     
@@ -303,7 +303,7 @@ add_shortcode("actionbutton", "action_button");
 
 /** ACF Fields include **/
 
-// include_once( get_template_directory().'/fields/fields.php' );
+include_once( get_template_directory().'/fields/fields.php' );
 
 
 ?>
