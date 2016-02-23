@@ -73,79 +73,87 @@ if ($blocks_enabled == 1) {
                 
                 if ($block_loop == 1) { $currentcol = $activecol1; } else { $currentcol = $activecol2; }
                 
-                if($currentcol > 0) { // additional check: if there are active coloumns in the first/second block, then display.
+                if($currentcol > 0) {   // additional check: if there are active coloumns in the first/second block, then display.
                 
                 $blockbg = 'blockbg_'.$block_loop;
                 $bgid = get_field($blockbg);
-                $bgurl = wp_get_attachment_image_src($bgid, 'thumb-big');
-                                
-                if ( $bgurl ) { ?>
+                
+                    if ($bgid) {            // check if a custom block-background is set
+                        $bgurl = wp_get_attachment_image_src($bgid, 'thumb-big');
+                    } else {                // if not, then rollback to featured image as background
+                        $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' );
+                    }
+                
+                if ( $bgurl ) {         // if $bgurl exist -> so there is a custom block-background or a feature image, show the bg image  ?>
+                        
                         <div class="block col-<?php echo $currentcol; ?>" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center; padding-top: 300px;"> <!-- BLOCK START -->
-                <?php 
-                } else { ?>
+               
+                <?php } else {          // if neither block-background nor featured image are set, then display pattern.svg (see css for .block) ?>
             
-            <div class="block col-<?php echo $currentcol; ?>"> <!-- BLOCK START --> <?php } ?>
-                <div class="inblock-wrap flex-<?php echo $currentcol; ?>"> <!-- INNER WRAPPER -->
-                    <?php
-                    
-                    $col_loop = 1;
-                    
-                    while ($col_loop <= 4) {
-                        
-                        $colname = 'activate_column_'.$block_loop.'_'.$col_loop;
-                        
-                        $is_active = get_field($colname);
+                        <div class="block col-<?php echo $currentcol; ?>"> <!-- BLOCK START --> <?php 
                             
-                            if($is_active == 1) {
+                            } ?>
+                
+                            <div class="inblock-wrap flex-<?php echo $currentcol; ?>"> <!-- INNER WRAPPER -->
+                                <?php
                                 
-                                $eocname = 'eoc_'.$block_loop.'_'.$col_loop;
-                                $eocval = get_field($eocname);
-                                          
-                                    // Now we display custom or existing content
+                                $col_loop = 1;
                                 
-                                    if ( $eocval == 'custom' ) { 
+                                while ($col_loop <= 4) {
+                                    
+                                    $colname = 'activate_column_'.$block_loop.'_'.$col_loop;
+                                    
+                                    $is_active = get_field($colname);
                                         
-                                        $customname = 'custom_content_'.$block_loop.'_'.$col_loop;
-                                        $customval = get_field($customname);
-                                        
-                                        ?>
-                                        
-                                        <div class="single-block">
-                                            <?php echo $customval; ?>
-                                        </div>
-        
-                                    <?php
-                                    } else {
-                                        
-                                        $existname = 'existing_content_'.$block_loop.'_'.$col_loop;
-                                        $existval = get_field($existname);
-                                        $postob = get_post($existval[0]);
-                                        $titleattr = the_title_attribute( array('echo' => 0, 'post' => $existval[0] ));
-                                        $posttitle = get_the_title($existval[0]);
-                                        $postimg = get_the_post_thumbnail($existval[0], 'thumb-medium');
-                                        $posturl = get_the_permalink($existval[0]);
-                                        $postexc = wp_trim_words( $postob->post_content, 30 );
-                                        ?>
-                                        
-                                        <div class="single-block existing">
-                                           <div class="zoom">
-                                                <a href="<?php echo $posturl; ?>">
-                                                    <?php echo $postimg; ?>
-                                                </a>
-                                                <div class="zoom-icon"></div>
-                                            </div>
-                                            <?php echo '<h1>'.$posttitle.'</h1>'; ?>
-                                            <?php echo '<p>'.$postexc.'</p>'; // Display the post Excerpt ?>
-                                            <a class="block-more" href="<?php echo $posturl; ?>" title="<?php echo $titleattr; ?>">MORE INFO</a>
-                                        </div><?php
-                                    }            
-                                
-                            }
-                        $col_loop++;
-                    } // END COL LOOP
-                    ?>
-                </div> <!-- INNER WRAPPER END -->
-            </div> <!-- BLOCK DIV END -->
+                                        if($is_active == 1) {
+                                            
+                                            $eocname = 'eoc_'.$block_loop.'_'.$col_loop;
+                                            $eocval = get_field($eocname);
+                                                      
+                                                // Now we display custom or existing content
+                                            
+                                                if ( $eocval == 'custom' ) { 
+                                                    
+                                                    $customname = 'custom_content_'.$block_loop.'_'.$col_loop;
+                                                    $customval = get_field($customname);
+                                                    
+                                                    ?>
+                                                    
+                                                    <div class="single-block">
+                                                        <?php echo $customval; ?>
+                                                    </div>
+                    
+                                                <?php
+                                                
+                                                } else {
+                                                    
+                                                    $existname = 'existing_content_'.$block_loop.'_'.$col_loop;
+                                                    $existval = get_field($existname);
+                                                    $postob = get_post($existval[0]);
+                                                    $titleattr = the_title_attribute( array('echo' => 0, 'post' => $existval[0] ));
+                                                    $posttitle = get_the_title($existval[0]);
+                                                    $postimg = get_the_post_thumbnail($existval[0], 'thumb-medium');
+                                                    $posturl = get_the_permalink($existval[0]);
+                                                    $postexc = wp_trim_words( $postob->post_content, 30 );
+                                                    ?>
+                                                    
+                                                    <div class="single-block existing">
+                                                       <div class="zoom">
+                                                            <a href="<?php echo $posturl; ?>">
+                                                                <?php echo $postimg; ?>
+                                                            </a>
+                                                            <div class="zoom-icon"></div>
+                                                        </div>
+                                                        <?php echo '<h1>'.$posttitle.'</h1>'; ?>
+                                                        <?php echo '<p>'.$postexc.'</p>'; // Display the post Excerpt ?>
+                                                        <a class="block-more" href="<?php echo $posturl; ?>" title="<?php echo $titleattr; ?>">MORE INFO</a>
+                                                    </div><?php
+                                                }            
+                                        }
+                                    $col_loop++;
+                                } // END COL LOOP ?>
+                            </div> <!-- INNER WRAPPER END -->
+                        </div> <!-- BLOCK DIV END -->
         <?php
         } 
         $block_loop++;
