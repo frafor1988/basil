@@ -6,7 +6,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.2
+ * @since basil 0.3
  */
 
 ?><!DOCTYPE html>
@@ -40,7 +40,7 @@
                 			<?php
                 				wp_nav_menu( array(
                 					'theme_location' => 'secondary',
-                					'menu_class'     => 'secondary-menu',
+                					'menu_class'     => 'primary-menu',
                 				 ) );
                 			?>
                 		</nav><!-- #secondary-navigation -->
