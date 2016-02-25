@@ -6,7 +6,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.2
+ * @since basil 0.3
  */
 
 ?><!DOCTYPE html>
@@ -24,6 +24,49 @@
 <body <?php body_class(); ?>>
     
     <header id="top-header">
+        <div id="child-header">
+            <?php if ( has_nav_menu( 'secondary' ) OR has_nav_menu('social' )) : ?>
+                <div id="secondary-toggle" class="showmenu">
+                </div><!-- #secondary-toggle -->
+                <div id="fullheight-menu">
+                    <?php if ( has_nav_menu( 'secondary' )) : 
+                        $menu_location = 'secondary';
+                        $locations = get_nav_menu_locations();
+                        $menu_id = $locations[ $menu_location ];
+                        $menu_obj = wp_get_nav_menu_object($menu_id);
+                        $menu_name = $menu_obj->name; ?>
+                		<nav id="secondary-navigation" class="other-navigation" aria-label="<?php _e( 'Secondary Menu', 'basil' ); ?>">
+                			<h3 class="menu-title"><?php echo $menu_name; ?></h3>
+                			<?php
+                				wp_nav_menu( array(
+                					'theme_location' => 'secondary',
+                					'menu_class'     => 'primary-menu',
+                				 ) );
+                			?>
+                		</nav><!-- #secondary-navigation -->
+                	<?php endif; ?>
+                	<?php if ( has_nav_menu( 'social' )) : 
+                	    $menu_location = 'social';
+                        $locations = get_nav_menu_locations();
+                        $menu_id = $locations[ $menu_location ];
+                        $menu_obj = wp_get_nav_menu_object($menu_id);
+                        $menu_name = $menu_obj->name; ?>
+                		<nav class="social-navigation" aria-label="<?php _e( 'Secondary Menu', 'basil' ); ?>">
+                			<h3 class="menu-title"><?php echo $menu_name; ?></h3>
+                			<?php
+                				wp_nav_menu( array(
+                					'theme_location' => 'social',
+                					'menu_class'     => 'social-links-menu',
+                					'depth'          => 1,
+									'link_before'    => '<span class="screen-reader-text">',
+									'link_after'     => '</span>',
+                				 ) );
+                			?>
+                		</nav><!-- #social-navigation -->
+                	<?php endif; ?>
+                </div><!-- #fullpage-menu -->
+	        <?php endif; ?>
+	    </div>
 	    <h1 class="top-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 	        			<?php if ( has_nav_menu( 'primary' ) ) : ?>
 							<nav id="site-navigation" class="main-navigation" aria-label="<?php _e( 'Primary Menu', 'basil' ); ?>">

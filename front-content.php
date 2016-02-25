@@ -9,7 +9,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.2
+ * @since basil 0.3
  */
 
 the_content();

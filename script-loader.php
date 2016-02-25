@@ -10,7 +10,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.2
+ * @since basil 0.3
  */
  
 ?>
@@ -60,3 +60,18 @@
 	});
 	
 </script>
+<?php if ( has_nav_menu( 'secondary' ) OR has_nav_menu('social' )) { ?>
+    <script type="text/javascript">
+    	            $(document).ready(function() {
+    
+                    		$('#secondary-toggle').on('click', function () {
+                    			$('#fullheight-menu').toggle( 'slide', { direction: 'right' }, 1000);
+                    			setTimeout(function(){
+                        			$('#secondary-toggle').toggleClass( "hidemenu" );
+                        			$('#secondary-toggle').toggleClass( "showmenu" );
+                    			}, 1000);
+                    		});
+                    		
+                    });
+    </script>
+<?php } ?>

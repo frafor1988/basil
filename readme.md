@@ -20,6 +20,7 @@ All these features are included from v.0.2
 * Lightweight and Responsive: less than 2000 lines of CSS, and still works an all devices!
 * SEO & Content Friendly: no more long post or pages just for Google sake! With Basil, Google has its own content no one will ever see.
 * actionbutton Shortcode to create custom content-width call to actions in every post or page you want
+* One always-in-sight menu area, plus one Full Width menu area for Secondary Menu and Social Links Menu
 * 4 footer widget areas + 1 colophon widget area for credits!
 * Post & Page editing is easy and straightforward: just read and fill the forms as you wish
 * Works beautifully with Contact Form 7 to create awesome one-page forms

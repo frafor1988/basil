@@ -13,7 +13,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.2
+ * @since basil 0.3
  */
 
 $blocks_enabled = get_field('activate_blocks');

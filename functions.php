@@ -21,7 +21,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.2
+ * @since basil 0.3
  */
 
 if ( ! function_exists( 'basil_setup' ) ) :
@@ -51,6 +51,7 @@ function basil_setup() {
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu', 'basil' ),
+		'secondary' => __( 'Full Height Menu', 'basil' ),
 		'social'  => __( 'Social Links Menu', 'basil' ),
 	) );
 
@@ -193,7 +194,7 @@ add_action( 'wp_head', 'basil_javascript_detection', 0 );
 /**
  * Enqueues scripts and styles.
  *
- * @since basil 0.2
+ * @since basil 0.3
  */
 function basil_scripts() {
     
@@ -220,6 +221,7 @@ function basil_scripts() {
 	wp_enqueue_script('jquery');
     }
 
+    wp_enqueue_script( 'jquery-ui', 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js', array( 'jquery' ));
     wp_enqueue_script( 'scrollTo', '//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js', array( 'jquery' ));
 	wp_enqueue_script( 'visible', '//cdn.jsdelivr.net/jquery.visible/1.1.0/jquery.visible.min.js', array( 'jquery' ));
 	
@@ -296,7 +298,7 @@ function action_button($atts, $content = null) {
       "target" => _self
    ), $atts));
    
-    return "<span class='action-wrap'><div class='action-left'><span class='right-arrow'></span><span class='action-text'>".$text."</span></div><div class='action-right'><span class='action-button'><a class='block-more' href='".$url."' target='".$target."'>".$label."</a></span></div></span>";
+    return "<div class='action-wrap'><div class='action-left'><span class='right-arrow'></span><span class='action-text'>".$text."</span></div><div class='action-right'><span class='action-button'><a class='block-more' href='".$url."' target='".$target."'>".$label."</a></span></div></div>";
 }
 add_shortcode("actionbutton", "action_button");
 
