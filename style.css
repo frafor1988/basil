@@ -4,7 +4,7 @@ Theme URI:
 Author: ffd
 Author URI: http://ffd-web.com/
 Description: Basil is a basic modern theme for Wordpress, easy to use and cool looking
-Version: 0.1
+Version: 0.3.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: green, gray, white, light, one-column, two-columns, three-columns, four-columns, responsive-layout, custom-menu, featured-images
@@ -755,7 +755,7 @@ iframe {
     margin: 3.5% 6.5% 7px 7px;
 }
 
-.primary-menu {
+.primary-menu, .secondary-menu {
     display: inline;
     list-style-type: none;
     padding: 0;
@@ -769,7 +769,7 @@ iframe {
     text-transform: uppercase;
 }
 
-.primary-menu li a {
+.primary-menu li a, .secondary-menu li a {
     color: #FFF;
     font-weight: bold;
     font-size: 21px;
@@ -832,12 +832,13 @@ a:active {
     right: 0;
     margin-top: 6.5vh;
     height: 93.5vh;
-    width: 75vw;
+    width: 33vw;
     background: #c1da7f;
 }
 
 .showmenu:before {
     content: '\f419';
+    margin-right: 5px;
 }
 
 .hidemenu:before {
@@ -850,11 +851,16 @@ a:active {
     padding-top: 5vh;
 }
 
+.secondary-menu {
+    margin: 0;
+}
+
 #secondary-navigation li {
     width: 100%;
     display: inline-block;
     text-align: center;
     line-height: 2.3;
+    text-transform: uppercase;
 }
 
 .menu-title {
