@@ -47,6 +47,7 @@ function basil_setup() {
 	set_post_thumbnail_size( 1200, 0, true );
 	add_image_size( 'thumb-big', 1366, 660, true );
 	add_image_size( 'thumb-medium', 500, 500, true );
+	add_image_size( 'thumb-small', 250, false );
 
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
@@ -217,13 +218,16 @@ function basil_scripts() {
     
     if( !is_admin()){
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("//cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"), false, '2.1.4');
+	wp_register_script('jquery', ("//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"), false, '2.2.1');
 	wp_enqueue_script('jquery');
     }
 
-    wp_enqueue_script( 'jquery-ui', 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js', array( 'jquery' ));
+    wp_enqueue_script( 'jquery-ui', '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js', array( 'jquery' ));
     wp_enqueue_script( 'scrollTo', '//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js', array( 'jquery' ));
-	wp_enqueue_script( 'visible', '//cdn.jsdelivr.net/jquery.visible/1.1.0/jquery.visible.min.js', array( 'jquery' ));
+	wp_enqueue_script( 'viewport', get_template_directory_uri() . '/js/jquery.viewport.min.js', array( 'jquery' ));
+	wp_enqueue_script( 'basilmobile', get_template_directory_uri() . '/js/jquery.basilmobile.js', array( 'jquery' ));
+	$translation_array = array( 'templateUrl' => get_template_directory_uri() );
+	wp_localize_script( 'basilmobile', 'basil', $translation_array );
 	
 	wp_localize_script( 'basil-script', 'screenReaderText', array(
 		'expand'   => __( 'expand child menu', 'basil' ),
@@ -261,6 +265,10 @@ if( ! class_exists('acf') ) {
         // 4. Hide & Include ACF
 		define( 'ACF_LITE', true );
         include_once( get_template_directory() . '/inc/acf/acf.php' );
+        
+        // ACF Fields include
+        include_once( get_template_directory().'/fields/fields.php' );
+
 }
 
 /** Default BG IMAGE as a Function **/
@@ -273,6 +281,18 @@ function the_default_bg() {
     
     echo $imgsrc; // outputs img src to use as background image in blog layout
 
+}
+
+function the_basil_logo() {
+    if ( get_theme_mod( 'basil_logo' ) ) {
+        $logoid = get_theme_mod( 'basil_logo' );
+        $logourl = wp_get_attachment_image_src( $logoid, 'thumb-small');
+        $homeurl = esc_url( home_url( '/' ) );
+        $alt = get_bloginfo( 'name' );
+        $imgtag = "<div id='logo'><a title='".$alt."' href='".$homeurl."' rel='home'><img src='".$logourl[0]."' alt='".$alt."' /></a></div>";
+        
+        echo $imgtag;
+    } 
 }
 
 /** Custom sitewide Read More button **/
@@ -302,10 +322,27 @@ function action_button($atts, $content = null) {
 }
 add_shortcode("actionbutton", "action_button");
 
+/** Theme Customizr Fields **/
 
-/** ACF Fields include **/
+function basil_theme_customizer( $wp_customize ) {
+    
+    // Add logo upload section
+    $wp_customize->add_section( 'basil_logo_section' , array(
+    'title'       => __( 'Logo', 'basil' ),
+    'priority'    => 30,
+    'description' => 'Upload your logo. It will be displayed on the top left corner.',
+    ) );
+    
+    $wp_customize->add_setting( 'basil_logo' );
+    
+    $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'basil_logo', array(
+    'label'    => __( 'Logo', 'basil' ),
+    'section'  => 'basil_logo_section',
+    'settings' => 'basil_logo',
+    ) ) );
 
-include_once( get_template_directory().'/fields/fields.php' );
+}
+add_action( 'customize_register', 'basil_theme_customizer' );
 
 
 ?>

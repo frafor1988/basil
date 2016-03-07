@@ -84,13 +84,23 @@ if ($blocks_enabled == 1) {
                         $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' );
                     }
                 
+                ?>
+                
+                    <div class="block col-<?php echo $currentcol; ?>"> <!-- BLOCK START -->
+                
+                <?php
+                
                 if ( $bgurl ) {         // if $bgurl exist -> so there is a custom block-background or a feature image, show the bg image  ?>
                         
-                        <div class="block col-<?php echo $currentcol; ?>" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center; padding-top: 300px;"> <!-- BLOCK START -->
+                        <div class="block-bg" style="background-image: url('<?php echo $bgurl[0]; ?>')">
+                        </div>
                
                 <?php } else {          // if neither block-background nor featured image are set, then display pattern.svg (see css for .block) ?>
             
-                        <div class="block col-<?php echo $currentcol; ?>"> <!-- BLOCK START --> <?php 
+                        <div class="block-bg" style="background-image: url('<?php the_default_bg(); ?>')">
+                        </div>
+                        
+                         <?php 
                             
                             } ?>
                 

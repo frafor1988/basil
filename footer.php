@@ -11,7 +11,6 @@
  */
 ?>
 
-
 </div><!-- #Primary -->
 </div><!-- #page -->
 <?php the_posts_pagination( array(
@@ -34,21 +33,25 @@
         
     } // END SIDEBAR COUNTER ?>
     
+    <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>"> <!-- #SIDEBAR-FOOTER START-->
+    
     <?php 
     
         $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' );
                 
         if ( $bgurl ) {         // if $bgurl exist -> so there is a feature image, show it as bg image  ?>
     
-        <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center;">
-        
+            <div class="block-bg" style="background-image: url('<?php echo $bgurl[0]; ?>')">
+            </div>
+    
         <?php } else { ?>
-    
-        <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>"> <!-- #SIDEBAR-FOOTER START--> 
         
-        <?php } ?>
+            <div class="block-bg" style="background-image: url('<?php the_default_bg(); ?>')">
+            </div>
+          
+    <?php } 
     
-    <?php if ($sidebar_count != 0 ) { // If there is any sidebar out there, then show it (or them!) ?>
+    if ($sidebar_count != 0 ) { // If there is any sidebar out there, then show it (or them!) ?>
     
         
             <div class="inblock-wrap"> <!-- INNER WRAPPER START -->
@@ -81,7 +84,7 @@
             </div> <!-- INNER WRAPPER END -->
     
     <?php   } ?>
-    
+    <div id="visibilitychecker"></div>
     </div> <!-- #SIDEBAR-FOOTER END -->
     
     <footer id="colophon">

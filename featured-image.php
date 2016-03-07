@@ -17,15 +17,23 @@
  * @since basil 0.3
  */
 
+?>
+
+<header id="image-gallery"> 
+
+<?php 
+
 if ( has_post_thumbnail() ) {
     
-  $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' ); ?>
+    $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' ); ?>
+    
+    <div class="block-bg" style="background-image: url('<?php echo $bgurl[0]; ?>')">
+    </div>
   
-    <header id="image-gallery" style="background: #ccc url('<?php echo $bgurl[0]; ?>') no-repeat fixed center center; height: 100vh;"> 
-
 <?php } else { ?>
     
-    <header id="image-gallery" style="background: #ccc url('<?php the_default_bg(); ?>') no-repeat fixed center center; height: 100vh;">
+    <div class="block-bg" style="background-image: url('<?php the_default_bg(); ?>')">
+    </div>
     
     <?php } ?>
     

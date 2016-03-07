@@ -6,7 +6,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.3
+ * @since basil 0.2
  */
 
 ?><!DOCTYPE html>
@@ -24,6 +24,7 @@
 <body <?php body_class(); ?>>
     
     <header id="top-header">
+        <?php the_basil_logo(); ?>
         <div id="child-header">
             <?php if ( has_nav_menu( 'secondary' ) OR has_nav_menu('social' )) : ?>
                 <div id="secondary-toggle" class="showmenu">

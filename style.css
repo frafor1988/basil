@@ -4,7 +4,7 @@ Theme URI:
 Author: ffd
 Author URI: http://ffd-web.com/
 Description: Basil is a basic modern theme for Wordpress, easy to use and cool looking
-Version: 0.3.1
+Version: 0.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: green, gray, white, light, one-column, two-columns, three-columns, four-columns, responsive-layout, custom-menu, featured-images
@@ -25,6 +25,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
  * 5.0 - Forms
  * 6.0 - Navigation
  *   6.1 - Links
+ *   6.2 - Full Height Menu Area
+ *   6.3 - Logo
  * 7.0 - Content
  *   7.1 - Blocks
  *   7.2 - Block coloumns
@@ -447,6 +449,8 @@ html {
 
 body {
 	background: #f2f2f2;
+    max-width: 100%;
+	overflow-x: hidden;
 	/* Fallback for when there is no custom background color defined. */
 }
 
@@ -547,7 +551,7 @@ td {
 /* Placeholder text color -- selectors need to be separate to work. */
 ::-webkit-input-placeholder {
 	color: #686868;
-	font-family: , sans-serif;
+	font-family: sans-serif;
 }
 
 :-moz-placeholder {
@@ -813,7 +817,6 @@ a:active {
     position: fixed;
     left: 0;
     right: 0;
-    width: 100%;
     color: #FFF;
     z-index: 10;
 }
@@ -830,8 +833,8 @@ a:active {
     display: none;
     position: absolute;
     right: 0;
-    margin-top: 6.5vh;
-    height: 93.5vh;
+    margin-top: 45px;
+    height: 100vh;
     width: 33vw;
     background: #c1da7f;
 }
@@ -848,7 +851,7 @@ a:active {
 }
 
 #secondary-navigation {
-    padding-top: 5vh;
+    padding-top: 7.5%;
 }
 
 .secondary-menu {
@@ -1020,12 +1023,25 @@ a:active {
 	content: "\f220";
 }
 
+/** 6.3 Logo - Uploaded from Customizr**/
+
+#logo {
+    position: fixed;
+    top: 24px;
+    left: 60px;
+    max-width: 165px;
+}
+
+#logo img {
+    width: 100%;
+}
+
 /**
  * 7.0 - Content
  */
  
 #page {
-    background: #CCC;   
+    background: transparent;   
 }
  
 #top-header {
@@ -1051,14 +1067,18 @@ a:active {
 #image-gallery {
     position: fixed;
     width: 100%;
-    z-index: -1;
+    z-index: -2;
     top: 0;
     left: 0;
-    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top center;
+    height: 100%;
 }
 
-#image-gallery img {
+#image-gallery .block-bg {
     width: 100%;
+    height: 100%;
 }
 
 #image-gallery .titles-wrapper {
@@ -1073,6 +1093,7 @@ a:active {
     color: #FFF;
     font-size: 75px;
     text-transform: uppercase;
+    margin: 30px 0;
 }
 
 .permalink .entry-title {
@@ -1145,7 +1166,7 @@ a:active {
 
 .inblock-wrap > p, .inblock-wrap > ul, .inblock-wrap > ol, .inblock-wrap > h1, 
 .inblock-wrap > h2, .inblock-wrap > h3, .inblock-wrap > h4, .inblock-wrap > h5, .inblock-wrap > h6,
-.inblock-wrap > blockquote, .inblock-wrap > .the-meta, .col-1 .single-block > p, .col-1 .single-block > p,
+.inblock-wrap > blockquote, .inblock-wrap > .the-meta, .inblock-wrap > .sharedaddy, .col-1 .single-block > p, .col-1 .single-block > p,
 .col-1 .single-block > ul, .col-1 .single-block > ol, .col-1 .single-block > h1, .col-1 .single-block > h2,
 .col-1 .single-block > h3, .col-1 .single-block > h4, .col-1 .single-block > h5, .col-1 .single-block > h6,
 .col-1 .single-block > blockquote
@@ -1164,15 +1185,35 @@ a:active {
 .block {
     float: left;
     width: 100%;
-    background: transparent url('img/pattern.svg') fixed center center;
-    padding-top: 140px;
-    background-size: auto 100%;
+    position: relative;
+    padding-top: 450px;
+    overflow: hidden;
 }
 
 .block:first-child {
     padding-top: 0;
 }
 
+.block-bg { 
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: 450px;
+    background-size: cover;
+    background-position: top center;
+    background-attachment: fixed;
+    text-align: center;
+    z-index: -2;
+}
+
+.block-bg img {
+    width: 150%;
+    max-width: none;
+}
+
+.blog .block-bg {
+    height: 100%;
+}
 
 .home #single-content p {
     padding: 0 5%;
@@ -1203,8 +1244,7 @@ a:active {
 .zoom {
     width: 90%;
     margin: 0 auto 13%;
-    overflow: hidden;
-    border-radius: 50%;
+    overflow: visible;
     position: relative;
     cursor: pointer;
 }
@@ -1229,6 +1269,7 @@ a:active {
 
 .zoom img {
     width: 100%;
+    border-radius: 50%;
     transition: 0.5s;
 }
 
@@ -1517,12 +1558,16 @@ a:active {
 /** 8.0 Blog Page - Layout **/
 
 .blog .entry-header, .archive .entry-header, .single .entry-header, .search .entry-header {
-    margin-bottom: 150px;
-    margin-bottom: 15vh;
+    margin-bottom: 105px;
+    margin-bottom: 7%;
+}
+
+.blog .block, .single .block {
+    padding-top: 7%;
 }
 
 .blog .block:first-child {
-    background: transparent;
+    background-color: transparent;
 }
 
 .the-meta {
@@ -1629,9 +1674,12 @@ a:active {
 }
 
 #sidebar-footer {
-    background: transparent url('img/pattern.svg') fixed top center;
-    margin-bottom: 50vh;
+    margin-bottom: 350px;
     position: relative;
+}
+
+#sidebar-footer.no-margin {
+    margin: 0;
 }
 
 #colophon {
@@ -1639,20 +1687,31 @@ a:active {
     color: #FFF;
     position: fixed;
     bottom: 0;
-    width: 100vw;
     width: 100%;
-    z-index: -2;
+    min-height: 350px;
+    z-index: -3;
+    background: #0c0c0c;
+    display: table;
+    padding: 10% 0;
+}
+
+#colophon.colophon-mobile {
+    clear: both;
+    min-height: 350px;
+    margin-bottom: 0;
+    position: static;
+    padding: 20% 0;
 }
 
 #colophon .single-colophon {
+    display: table-cell;
     width: 100%;
-    height: 50vh;
-    background: #0c0c0c;
 }
 
 .credits {
-    margin-top: 23vh;
     width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .texteo {
@@ -1697,28 +1756,15 @@ a.page-numbers:hover {
 
 /** 11. Media Queries **/
 
-@media screen and (orientation: landscape) {
-    
-    .block, #sidebar-footer, #image-gallery {
-        background-size: 100% auto !important;
-    }
-
+.block, #sidebar-footer, #image-gallery {
+        background-size: cover;
 }
 
-@media screen and (orientation: landscape) and (max-width: 1480px) {
-    
-    .block, #sidebar-footer, #image-gallery {
-        background-size: auto 100% !important;
-    }
-
-}
-
-@media screen and (orientation: portrait) {
-    
-    .block, #sidebar-footer, #image-gallery {
-        background-size: auto 100% !important;
-    }
-   
+#visibilitychecker  {
+    background: #fff none repeat scroll 0 0;
+    clear: both;
+    height: 1px;
+    width: 100%;
 }
 
 @media screen and (min-width: 951px) and (max-width: 1280px) {
@@ -1753,7 +1799,7 @@ a.page-numbers:hover {
 }
 
 @media screen and (min-width: 751px) and (max-width: 950px) {
-    
+
     flex-1, .flex-2, .flex-3, .flex-4 {
         display: block;
     }
@@ -1800,7 +1846,6 @@ a.page-numbers:hover {
     
     .main-navigation {
         margin: 10% 0 0 0;
-        margin: 6.5vh 0 0 0;
         width: 100%;
     }
     
