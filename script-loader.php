@@ -10,7 +10,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.3
+ * @since basil 0.4
  */
  
 ?>
@@ -22,7 +22,7 @@ basilmobile();
 
 $(document).scroll(function() {
 	    
-	        if ($('#visibilitychecker').is(':in-viewport(200)') || $('#visibilitychecker').is(":in-viewport(0)")) {
+	        if ($('#visibilitychecker').is(':in-viewport(25)') || $('#visibilitychecker').is(":in-viewport(0)")) {
                 $('#colophon').css("z-index", -2);
             } else {
                 $('#colophon').css("z-index", -3);

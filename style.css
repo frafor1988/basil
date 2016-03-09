@@ -4,7 +4,7 @@ Theme URI:
 Author: ffd
 Author URI: http://ffd-web.com/
 Description: Basil is a basic modern theme for Wordpress, easy to use and cool looking
-Version: 0.4
+Version: 0.4.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: green, gray, white, light, one-column, two-columns, three-columns, four-columns, responsive-layout, custom-menu, featured-images
@@ -1066,19 +1066,28 @@ a:active {
 
 #image-gallery {
     position: fixed;
+    top: 0;
     width: 100%;
     z-index: -2;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: top center;
-    height: 100%;
 }
 
-#image-gallery .block-bg {
+.bg-wrap {
+    position: relative;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-image {
+    position: static;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    z-index: 100;
     width: 100%;
-    height: 100%;
+}
+
+.bg-wrap img {
+    width: 100%;
 }
 
 #image-gallery .titles-wrapper {
@@ -1093,7 +1102,7 @@ a:active {
     color: #FFF;
     font-size: 75px;
     text-transform: uppercase;
-    margin: 30px 0;
+    margin: 5px 0 0;
 }
 
 .permalink .entry-title {
@@ -1125,7 +1134,6 @@ a:active {
 	border: 2px solid #f2f2f2;
     bottom: 5%;
     left: calc(50% - 50px);
-    margin: 0 auto;
     position: absolute;
     text-align: center;
     width: 100px;
@@ -1142,6 +1150,7 @@ a:active {
 	width: 100%;
 	height: 100%;
 	background: url('img/arrow-down.png') center center no-repeat;
+	font-family: Genericons;
 	background-size: 70%;
 	animation-name: updown;
     animation-duration: 2s;
@@ -1198,6 +1207,7 @@ a:active {
     position: absolute;
     top: 0;
     width: 100%;
+    height: 100%;
     min-height: 450px;
     background-size: cover;
     background-position: top center;
@@ -1419,10 +1429,11 @@ a:active {
 .action-right .block-more {
     border: 4px solid #fff;
     display: inline;
+    max-width: 90%;
     font-weight: 500;
     padding: 10px 25px;
     position: relative;
-    transition: 1s;
+    transition: 0.5s;
 }
 
 @keyframes leftright {
@@ -1562,8 +1573,12 @@ a:active {
     margin-bottom: 7%;
 }
 
-.blog .block, .single .block {
+.blog .block, .single .block, .search .block, .archive .block {
     padding-top: 7%;
+}
+
+.archive .block:first-child, .search .block:first-child {
+    padding-top: 12.5%;
 }
 
 .blog .block:first-child {
@@ -1643,12 +1658,19 @@ a:active {
 
 /** 9.0 Archives **/
 
-.category-title {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 2% 7px 7px 3.5%;
+.category-wrapper {
+    margin: 123px 0 0 0;
     color: #fff;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    background-color: #c1da7f;
+    display: table;
+}
+
+.category-title {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .category-title p {
@@ -1663,9 +1685,16 @@ a:active {
     font-weight: bold;
     transition: all 0.5s ease 0s;
     text-transform: uppercase;
-    margin-left: 10px;
+    margin-bottom: 0;
 }
 
+.archive #page, .search #page {
+    margin-top: -223px;
+}
+
+.archive .block:first-child .entry-header, .search .block:first-child .entry-header {
+    margin-top: 3.5%;
+}
 
 /** 10. Footer, Widget, Colophon **/
 
@@ -1839,13 +1868,23 @@ a.page-numbers:hover {
     
     #logo {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    max-width: 65px;
+    top: 6px;
+    left: 6px;
+    }
+    
+    #logo img {
+    width: auto;
+    max-height: 32px;
+    }
+    
+    .bottom-circle {
+    left: calc(50% - 40px);
+    height: 80px;
+    width: 80px;
     }
     
     .main-navigation {
-        margin: 10% 0 0 0;
+        margin: 50px 0 0 0;
         width: 100%;
     }
     
@@ -1853,9 +1892,13 @@ a.page-numbers:hover {
         text-align: center;
     }
     
+    #image-gallery .titles-wrapper {
+        top: 25%;
+    }
+    
     #image-gallery .entry-title {
         line-height: 1.25;
-        font-size: 65px;
+        font-size: 40px;
     }
     
     .primary-menu {
@@ -1897,20 +1940,29 @@ a.page-numbers:hover {
         bottom: 6.5%;
     }
     
+    .action-right .block-more {
+        display: inline-block;
+    }
+    
     .zoom {
         margin: 0 auto 9.5%;
         width: 75%;
     }
     
     .entry-subtitle {
-        font-size: 23px;
-        margin: 0 5%;
+        font-size: 16px;
+        line-height: 1.75;
+        margin: 20px 5% 0;
     }
 
     .action-left, .action-right {
         width: 100%;
         text-align: center;
-        padding: 3%;
+        padding: 5%;
+    }
+    
+    .action-left {
+        padding-bottom: 0;
     }
     
     .action-text {
@@ -1930,7 +1982,7 @@ a.page-numbers:hover {
     }
     
     .action-button, .action-text {
-        font-size: 21px;
+        font-size: 18px;
         float: none;
     }
     
@@ -1943,4 +1995,54 @@ a.page-numbers:hover {
     }
     
 }
-    
+
+/** 11.1 Background fit Media Queries for #image-gallery **/
+
+@media screen and (min-aspect-ratio: 1/10) {     /* 0.1 */
+    .bg-image {
+    margin-left: -180%;
+    width: 460%;
+    } 
+}
+
+@media screen and (min-aspect-ratio: 55/100) {     /* 0.5 */
+    .bg-image {
+    margin-left: -150%;
+    width: 400%;
+    } 
+}
+
+@media screen and (min-aspect-ratio: 8/10) {       /* 0.8 */
+    .bg-image {
+    margin-left: -83%;
+    width: 266%;
+    }
+}
+
+@media screen and (min-aspect-ratio: 10/10) {       /* 1 */
+    .bg-image {
+    margin-left: -60%;
+    width: 220%;
+    }
+}
+
+@media screen and (min-aspect-ratio: 125/100) {       /* 1.25 */
+    .bg-image {
+    margin-left: -40%;
+    width: 180%;
+    }   
+}
+
+@media screen and (min-aspect-ratio: 17/10) {       /* 1.7 */
+    .bg-image {
+    margin-left: -15%;
+    width: 130%;
+    }
+}
+
+@media screen and (min-aspect-ratio: 21/10) {       /* 2.1 */
+    .bg-image {
+    margin-left: 0;
+    width: 100%;
+    }   
+}

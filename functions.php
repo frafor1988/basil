@@ -21,7 +21,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.3
+ * @since basil 0.4
  */
 
 if ( ! function_exists( 'basil_setup' ) ) :
@@ -48,6 +48,7 @@ function basil_setup() {
 	add_image_size( 'thumb-big', 1366, 660, true );
 	add_image_size( 'thumb-medium', 500, 500, true );
 	add_image_size( 'thumb-small', 250, false );
+	add_image_size( 'square-gallery', 1024, 1024, true );
 
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
@@ -195,7 +196,7 @@ add_action( 'wp_head', 'basil_javascript_detection', 0 );
 /**
  * Enqueues scripts and styles.
  *
- * @since basil 0.3
+ * @since basil 0.4
  */
 function basil_scripts() {
     
@@ -273,20 +274,72 @@ if( ! class_exists('acf') ) {
 
 /** Default BG IMAGE as a Function **/
 
-function the_default_bg() {
-    
-    $imgsrc = get_template_directory_uri().'/img/pattern.svg';
- // $imgalt = get_bloginfo( 'name' );
- // $imgtag = "<img class='attachment-thumb-big size-thumb-big wp-post-image' width='1366' height='660' alt='".$imgalt."' src='".$imgsrc."'>";
-    
-    echo $imgsrc; // outputs img src to use as background image in blog layout
+// Set default value for Featured Images as Default Background
+if(!get_theme_mod('basil_featured_background')) {
+    set_theme_mod('basil_featured_background','yes');
+}
 
+function the_basil_bg_src() {
+    
+    $featback = get_theme_mod('basil_featured_background');
+    
+    if($featback == 'yes' && has_post_thumbnail()) {
+        
+        $bgurl = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'thumb-big' );
+        echo $bgurl[0];
+    
+    } else {
+    
+        if ( get_theme_mod( 'basil_background' ) ) {
+            
+            $custombg = get_theme_mod( 'basil_background' );
+            $bgurl = wp_get_attachment_image_src( $custombg, 'thumb-big');
+            echo $bgurl[0];
+            
+        } else {
+            
+            $bgurl = get_template_directory_uri().'/img/pattern.svg';
+            echo $bgurl; // outputs img src to use as background image in blog layout
+            
+        }
+    
+    }
+        
+}
+
+function the_basil_bg() {
+    
+    $featback = get_theme_mod('basil_featured_background');
+    
+    if($featback == 'yes' && has_post_thumbnail()) {
+        
+        $bgurl = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'thumb-big' );
+        $blockbg = "<div style='background-image: url(".$bgurl[0].")' class='block-bg'></div>";
+
+        echo $blockbg;
+    
+    } else {
+        
+        if ( get_theme_mod( 'basil_background' ) ) {
+            
+            $bgurl = wp_get_attachment_image_src(get_theme_mod( 'basil_background' ), 'thumb-big');
+            $blockbg = "<div class='block-bg' style='background-image: url(".$bgurl[0].");'></div>";
+            echo $blockbg;
+            
+        } else {
+            
+            $bgurl = get_template_directory_uri().'/img/pattern.svg';
+            $blockbg = "<div class='block-bg' style='background-image: url(".$bgurl.")'></div>";
+            echo $blockbg; // outputs img src to use as background image in blog layout
+            
+        }   
+    }
 }
 
 function the_basil_logo() {
     if ( get_theme_mod( 'basil_logo' ) ) {
-        $logoid = get_theme_mod( 'basil_logo' );
-        $logourl = wp_get_attachment_image_src( $logoid, 'thumb-small');
+
+        $logourl = wp_get_attachment_image_src(get_theme_mod( 'basil_logo' ), 'thumb-small');
         $homeurl = esc_url( home_url( '/' ) );
         $alt = get_bloginfo( 'name' );
         $imgtag = "<div id='logo'><a title='".$alt."' href='".$homeurl."' rel='home'><img src='".$logourl[0]."' alt='".$alt."' /></a></div>";
@@ -294,6 +347,19 @@ function the_basil_logo() {
         echo $imgtag;
     } 
 }
+
+function the_basil_favicon() {
+     if ( get_theme_mod( 'basil_favicon' ) ) {        
+         $favurl = wp_get_attachment_image_src(get_theme_mod('basil_favicon'));
+         $favtag = "<link rel='icon' type='image/png' href='".$favurl[0]."' />";
+         echo $favtag;        
+     } else {    
+         $favurl = get_template_directory_uri().'/img/wp_favicon.png';
+         $favtag = "<link rel='icon' type='image/png' href='".$favurl."' />";
+         echo $favtag;    
+     }
+}
+add_action('wp_head', 'the_basil_favicon');
 
 /** Custom sitewide Read More button **/
 
@@ -326,20 +392,54 @@ add_shortcode("actionbutton", "action_button");
 
 function basil_theme_customizer( $wp_customize ) {
     
-    // Add logo upload section
-    $wp_customize->add_section( 'basil_logo_section' , array(
-    'title'       => __( 'Logo', 'basil' ),
+    // Add Custom Images (logo, favicon & bg) upload section
+    $wp_customize->add_section( 'basil_custom_images' , array(
+    'title'       => __( 'Favicon, Logo & Backgrounds', 'basil' ),
     'priority'    => 30,
-    'description' => 'Upload your logo. It will be displayed on the top left corner.',
+    'description' => 'Upload your logo and the default background. The logo will be displayed on the top left corner. The background will be displayed if no featured image is set in post/pages.',
     ) );
+    
+    $wp_customize->add_setting( 'basil_favicon' );
+    
+    $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'basil_favicon', array(
+    'label'    => __( 'Site Favicon. Format: png, 64*64px', 'basil' ),
+    'section'  => 'basil_custom_images',
+    'mime_type' => 'image/png',
+    'settings' => 'basil_favicon',
+    ) ) );
     
     $wp_customize->add_setting( 'basil_logo' );
     
     $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'basil_logo', array(
-    'label'    => __( 'Logo', 'basil' ),
-    'section'  => 'basil_logo_section',
+    'label'    => __( 'Site Logo', 'basil' ),
+    'section'  => 'basil_custom_images',
+    'mime_type' => 'image',
     'settings' => 'basil_logo',
     ) ) );
+	
+	$wp_customize->add_setting( 'basil_background' );
+    
+    $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'basil_background', array(
+    'label'    => __( 'General Sitewide Background Image', 'basil' ),
+    'section'  => 'basil_custom_images',
+    'mime_type' => 'image',
+    'settings' => 'basil_background',
+    ) ) );
+    
+    $wp_customize->add_setting( 'basil_featured_background' );
+    
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'basil_featured_background', array(
+                'label'          => __( 'If a featured image is set, do you want to use it as a custom background?', 'basil' ),
+                'section'        => 'basil_custom_images',
+                'settings'       => 'basil_featured_background',
+                'type'           => 'radio',
+                'choices'        => array(
+                    'yes'   => __( 'yes' ),
+                    'no'  => __( 'no' )
+                )
+            )
+        )
+    );
 
 }
 add_action( 'customize_register', 'basil_theme_customizer' );

@@ -13,7 +13,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.3
+ * @since basil 0.4
  */
 
 $blocks_enabled = get_field('activate_blocks');
@@ -80,8 +80,6 @@ if ($blocks_enabled == 1) {
                 
                     if ($bgid) {            // check if a custom block-background is set
                         $bgurl = wp_get_attachment_image_src($bgid, 'thumb-big');
-                    } else {                // if not, then rollback to featured image as background
-                        $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' );
                     }
                 
                 ?>
@@ -97,7 +95,7 @@ if ($blocks_enabled == 1) {
                
                 <?php } else {          // if neither block-background nor featured image are set, then display pattern.svg (see css for .block) ?>
             
-                        <div class="block-bg" style="background-image: url('<?php the_default_bg(); ?>')">
+                        <div class="block-bg" style="background-image: url('<?php the_basil_bg_src(); ?>')">
                         </div>
                         
                          <?php 

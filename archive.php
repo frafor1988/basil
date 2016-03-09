@@ -8,7 +8,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.3
+ * @since basil 0.4
  */
 
 get_template_part('home'); ?>

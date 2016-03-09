@@ -7,7 +7,7 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.3
+ * @since basil 0.4
  */
 ?>
 
@@ -35,22 +35,9 @@
     
     <div id="sidebar-footer" class="block col-<?php echo $sidebar_count; ?>"> <!-- #SIDEBAR-FOOTER START-->
     
-    <?php 
+    <?php the_basil_bg(); ?>
     
-        $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' );
-                
-        if ( $bgurl ) {         // if $bgurl exist -> so there is a feature image, show it as bg image  ?>
-    
-            <div class="block-bg" style="background-image: url('<?php echo $bgurl[0]; ?>')">
-            </div>
-    
-        <?php } else { ?>
-        
-            <div class="block-bg" style="background-image: url('<?php the_default_bg(); ?>')">
-            </div>
-          
-    <?php } 
-    
+    <?php    
     if ($sidebar_count != 0 ) { // If there is any sidebar out there, then show it (or them!) ?>
     
         

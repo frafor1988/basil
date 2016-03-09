@@ -1057,14 +1057,12 @@ if(function_exists("register_field_group"))
 				'key' => 'field_56c2fe64f6f79',
 				'label' => 'Seo Text',
 				'name' => 'seo_text',
-				'type' => 'textarea',
+				'type' => 'wysiwyg',
 				'instructions' => 'SEO is nice: optimize your website content to fit Google\'s need and, with it, those of other search engines. However, sometimes SEO requirements battle with esthetics and layout. This text is useful to overcome these issues, as it\'s hidden to the users via CSS, but it remains readable by search spiders: in this way you can easily reach the suggested <strong>300 words minimum</strong> requirement for your page, without compromising the straightforward and extremely neat layout of the Basil theme!<br />
 	<span style="color: red; font-weight: bold">Please note: write this text with an eye to keyword and/or keyphrases, but always check key density, and <u>write it as you\'d write to humans</u> otherwise Google will notice that it\'s just a nonsense text block!</span>',
 				'default_value' => '',
-				'placeholder' => '',
-				'maxlength' => '',
-				'rows' => 4,
-				'formatting' => 'none',
+				'toolbar' => 'full',
+				'media_upload' => 'no',
 			),
 		),
 		'location' => array (
@@ -1096,5 +1094,6 @@ if(function_exists("register_field_group"))
 		'menu_order' => 0,
 	));
 }
+
 
 ?>

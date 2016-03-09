@@ -7,27 +7,14 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.3
+ * @since basil 0.4
  */
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'block' ); ?>>
 
-<?php 
+    <?php the_basil_bg(); ?>
 
-if ( has_post_thumbnail() ) {
-    
-  $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'big' ); ?>
-  
-    <div class="block-bg" style="background-image: url('<?php echo $bgurl[0]; ?>')">
-    </div> 
-
-<?php } else { ?>
-    
-    <div class="block-bg" style="background-image: url('<?php the_default_bg(); ?>')">
-    </div>
-    
-    <?php } ?>
         <header class="entry-header">
             
             <?php if (is_home() OR is_archive()) { ?>
@@ -48,7 +35,6 @@ if ( has_post_thumbnail() ) {
         } else {
             the_content();
         } ?>
-        <?php // the_content(); ?>
         <div class="the-meta">
                 <p>Posted on <?php the_time('l, F jS, Y') ?> at <?php the_time() ?> under <?php the_category(', ') ?><?php if(has_tag()) { ?> and tagged as <?php the_tags('',', '); ?>.<?php } else { ?>.<?php } ?></br>
         </div>

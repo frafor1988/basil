@@ -14,30 +14,17 @@
  *
  * @package basil
  * @subpackage index
- * @since basil 0.3
+ * @since basil 0.4
  */
 
 ?>
 
 <header id="image-gallery"> 
 
-<?php 
+    <div class="bg-wrap">
+        <div class="bg-image"><img alt="<?php the_title_attribute(); ?>" src="<?php the_basil_bg_src(); ?>" /></div>
+    </div>
 
-if ( has_post_thumbnail() ) {
-    
-    $bgurl = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-big' ); ?>
-    
-    <div class="block-bg" style="background-image: url('<?php echo $bgurl[0]; ?>')">
-    </div>
-  
-<?php } else { ?>
-    
-    <div class="block-bg" style="background-image: url('<?php the_default_bg(); ?>')">
-    </div>
-    
-    <?php } ?>
-    
-    
     <div class="titles-wrapper">
         <h2 class="entry-title"><?php the_title(); ?></h2>
         <?php if(get_field('subtitle') == true) : ?>

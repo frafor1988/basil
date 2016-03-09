@@ -79,22 +79,6 @@
 								?>
 							</nav><!-- .main-navigation -->
 			            <?php endif; ?>
-			            <?php if ( is_archive() ) { ?>
-			                <div class="category-title">
-			                    <?php if (is_tag()) { ?>
-			                        <p>Posts tagged as:</p>
-			                    <?php } else { ?>
-			                        <p>Posts in:</p>
-			                    <?php } ?>
-			                    <h3><?php single_cat_title(); ?>.</h3>
-			                </div>
-			            <?php } ?>
-			            <?php if ( is_search() ) { ?>
-			                <div class="category-title">
-			                    <p>Results for:</p>
-			                    <h3><?php the_search_query(); ?>.</h3>
-			                </div>
-			            <?php } ?>
     </header><!-- .site-header -->
             <?php if(get_field(seo_text)) { ?>
                 <div class="texteo">
@@ -102,3 +86,23 @@
                     <p><?php the_field(seo_text); ?>
                 </div>
             <?php } ?>
+    <?php if ( is_archive() ) { ?>
+            <div class="category-wrapper">
+                <div class="category-title">
+                    <?php if (is_tag()) { ?>
+                        <p>Posts tagged as:</p>
+                    <?php } else { ?>
+                        <p>Posts under:</p>
+                    <?php } ?>
+                    <h3><?php single_cat_title(); ?>.</h3>
+                </div>
+            </div>
+        <?php } ?>
+        <?php if ( is_search() ) { ?>
+            <div class="category-wrapper">
+                <div class="category-title">
+                    <p>Results for:</p>
+                    <h3><?php the_search_query(); ?>.</h3>
+                </div>
+            </div>
+        <?php } ?>
