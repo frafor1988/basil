@@ -22,7 +22,7 @@ basilmobile();
 
 $(document).scroll(function() {
 	    
-	        if ($('#visibilitychecker').is(':in-viewport(25)') || $('#visibilitychecker').is(":in-viewport(0)")) {
+	        if ($('#visibilitychecker').is(":in-viewport(0)")) {
                 $('#colophon').css("z-index", -2);
             } else {
                 $('#colophon').css("z-index", -3);
@@ -47,13 +47,12 @@ if(navigator.userAgent.match(/MSIE 10/i) || navigator.userAgent.match(/Trident\/
  
     /** Some vars **/
     var windowH = $(window).height();
+    var windowW = $(window).width();
  
     function marginTop() {
-            
-        
-		$("#page").css("margin-top", windowH +'px');
-		$("#image-gallery").css("max-height", windowH +'px');
-    		
+        var currentH = $(window).height();
+		$("#page").css("margin-top", currentH +'px');
+		$("#image-gallery").css("height", currentH +'px');
     };
     
 	$(document).ready(function() { 
@@ -68,15 +67,22 @@ if(navigator.userAgent.match(/MSIE 10/i) || navigator.userAgent.match(/Trident\/
 	
 	// The code below is used to prevent webpage recalculation for small changes in viewport
 	
-	$(window).resize(function() { 
-
-	    var newH = $(window).height();      // Records new windows height after resize
-	    var maxH = windowH + 60;        // Sets a positive delta of 50px
-	    var minH = windowH - 60;      // Sets a negative delta of 50px
-	        if( newH > maxH || newH < minH ) {           // If the height difference is more than 50px, then set new marginTop for #page
-		        marginTop();
-	        } else {  // Otherwise, do nothing  
-	        }                       
+	$(window).resize(function() {
+            var newH = $(window).height();     // Records new windows height after resize
+            var newW = $(window).width();
+            var maxH = windowH + 90;        // Sets a positive delta of 50px
+            var maxW = windowW + 60;
+            var minH = windowH - 90;      // Sets a negative delta of 50px
+            var minW = windowW - 60;
+                if(newH > maxH) {           // If the height difference is more than 50px, then set new marginTop for #page
+        	        marginTop();
+                } else if(newH < minH) {
+					marginTop();
+				} else if(newW > maxW) {
+					marginTop();
+				} else if(newW < minW ) {
+                    marginTop();
+                }
 	});
 	
 <?php } ?>

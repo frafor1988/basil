@@ -215,18 +215,18 @@ function basil_scripts() {
 
 	wp_enqueue_script( 'basil-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20150825', true );
     
-    // Drop this in functions.php or your theme
+    // Script loads in footer
     
     if( !is_admin()){
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"), false, '2.2.1');
+	wp_register_script('jquery', ("//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"), false, '2.2.1', true);
 	wp_enqueue_script('jquery');
     }
 
-    wp_enqueue_script( 'jquery-ui', '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js', array( 'jquery' ));
-    wp_enqueue_script( 'scrollTo', '//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js', array( 'jquery' ));
-	wp_enqueue_script( 'viewport', get_template_directory_uri() . '/js/jquery.viewport.min.js', array( 'jquery' ));
-	wp_enqueue_script( 'basilmobile', get_template_directory_uri() . '/js/jquery.basilmobile.js', array( 'jquery' ));
+    wp_enqueue_script( 'jquery-ui', '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js', array( 'jquery' ),'', true);
+    wp_enqueue_script( 'scrollTo', '//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js', array( 'jquery' ),'', true);
+	wp_enqueue_script( 'viewport', get_template_directory_uri() . '/js/jquery.viewport.min.js', array( 'jquery' ),'', true);
+	wp_enqueue_script( 'basilmobile', get_template_directory_uri() . '/js/jquery.basilmobile.js', array( 'jquery' ),'', true);
 	$translation_array = array( 'templateUrl' => get_template_directory_uri() );
 	wp_localize_script( 'basilmobile', 'basil', $translation_array );
 	
@@ -372,6 +372,11 @@ add_filter('excerpt_more', 'new_excerpt_more');
 function new_excerpt_more() {
     global $post;
     return '<a class="block-more" href="' . get_permalink($post->ID) . '" title="' . get_the_title($post->ID) . '" >READ MORE</a>';
+}
+
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+function custom_excerpt_length( $length ) {
+    return 80;
 }
 
 /** Embedded Shortcodes **/

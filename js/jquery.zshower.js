@@ -38,7 +38,7 @@ $.fn.zShower = function() {
     	    
             $.each(zImages, function(index, zImage) {
                 // Using isOnScreen to determin if the elements is within viewport
-                if(zImage.father.is(":in-viewport(250)") || zImage.father.is(":in-viewport(-250)")) {
+                if(zImage.father.is(":in-viewport(-25)") || zImage.father.is(":in-viewport(0)")) {
                     zImage.element.css('z-index', -1);
                     zImage.element.css('position', 'fixed');
                     zImage.element.css('height', h + 'px');
@@ -52,13 +52,17 @@ $.fn.zShower = function() {
         }
     	
     	current.zSetup();
+    	
+    	$(document).ready(function() {
+            zAnime();
+        });
         
         $(window).resize(function() {
-                current.zSetup();
+            current.zSetup();
         });
         
         $(document).scroll(function() {
-                zAnime();
+            zAnime();
         });
     	
         };

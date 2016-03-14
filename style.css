@@ -4,7 +4,7 @@ Theme URI:
 Author: ffd
 Author URI: http://ffd-web.com/
 Description: Basil is a basic modern theme for Wordpress, easy to use and cool looking
-Version: 0.4.1
+Version: 0.4.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: green, gray, white, light, one-column, two-columns, three-columns, four-columns, responsive-layout, custom-menu, featured-images
@@ -319,16 +319,15 @@ i {
 }
 
 blockquote {
-    font-family: "Times New Roman", serif;
-	border: 0 solid #;
-	border-left-width: 4px;
-	color: #686868;
-	font-size: 19px;
-	font-size: 1.1875rem;
-	font-style: italic;
-	line-height: 1.4736842105;
-	margin: 0 0 1.4736842105em;
-	padding: 0 0 0 1.263157895em;
+    border-color: #686868;
+    color: #686868;
+    font-family: genericons;
+    font-size: 26px;
+    font-style: italic;
+    line-height: 1;
+    margin: 0 0 1.974em 2em;
+    padding: 0 0 0 1.26316em;
+    padding-top: 0.5em !important;
 }
 
 blockquote,
@@ -336,7 +335,10 @@ q {
 	quotes: none;
 }
 
-blockquote:before,
+blockquote:before {
+    content: '\f106';
+}
+
 blockquote:after,
 q:before,
 q:after {
@@ -344,7 +346,10 @@ q:after {
 }
 
 blockquote p {
-	margin-bottom: 1.4736842105em;
+	margin-bottom: 1em;
+    margin-left: 1.5em;
+    font-family: "Times New Roman",serif;
+    font-size: 21px;
 }
 
 blockquote cite,
@@ -608,7 +613,7 @@ input[type="submit"][disabled]:focus {
     margin-top: 34px;
 }
 
-.col-1 div.wpcf7, #single-content div.wpcf7 {
+.col-1 div.wpcf7, #single-content div.wpcf7, #primary div.wpcf7 {
     padding: 0 7.5%;
     text-align: center;
 }
@@ -1027,7 +1032,7 @@ a:active {
 
 #logo {
     position: fixed;
-    top: 24px;
+    top: 16px;
     left: 60px;
     max-width: 165px;
 }
@@ -1195,7 +1200,7 @@ a:active {
     float: left;
     width: 100%;
     position: relative;
-    padding-top: 450px;
+    padding-top: 400px;
     overflow: hidden;
 }
 
@@ -1208,12 +1213,12 @@ a:active {
     top: 0;
     width: 100%;
     height: 100%;
-    min-height: 450px;
+    min-height: 400px;
     background-size: cover;
     background-position: top center;
     background-attachment: fixed;
     text-align: center;
-    z-index: -2;
+    z-index: -1;
 }
 
 .block-bg img {
@@ -1380,7 +1385,8 @@ a:active {
 .action-wrap {
     float: left;
     width: 100%;
-    margin-top: 2.5em;
+    background-color: #c1da7f;
+    margin: 1.5em 0 2em 0;
 }
 
 .right-arrow {
@@ -1496,6 +1502,19 @@ a:active {
 	margin: 0 auto;
 }
 
+.wp-caption {
+    margin-bottom: 24px;
+    max-width: 100%;
+}
+
+.wp-caption-text {
+    font-family: "Times New Roman", serif;
+    font-size: 16px;
+    font-style: italic;
+    width: 95%;
+    margin: 0 auto;
+}
+
 .gallery {
 	margin: 0 auto 1.75em;
 	padding-top: 28px;
@@ -1578,11 +1597,15 @@ a:active {
 }
 
 .archive .block:first-child, .search .block:first-child {
-    padding-top: 12.5%;
+    padding-top: 13%;
 }
 
-.blog .block:first-child {
-    background-color: transparent;
+.blog .block:first-child, .single .block {
+    padding-top: 11%;
+}
+
+.blog .block:first-child .entry-header, .single .entry-header {
+    margin-bottom: 10%;
 }
 
 .the-meta {
@@ -1659,7 +1682,7 @@ a:active {
 /** 9.0 Archives **/
 
 .category-wrapper {
-    margin: 123px 0 0 0;
+    margin: 140px 0 0 0;
     color: #fff;
     width: 100%;
     height: 100px;
@@ -1689,7 +1712,7 @@ a:active {
 }
 
 .archive #page, .search #page {
-    margin-top: -223px;
+    margin-top: -240px;
 }
 
 .archive .block:first-child .entry-header, .search .block:first-child .entry-header {
@@ -1717,27 +1740,33 @@ a:active {
     position: fixed;
     bottom: 0;
     width: 100%;
-    min-height: 350px;
     z-index: -3;
     background: #0c0c0c;
-    display: table;
-    padding: 10% 0;
 }
 
 #colophon.colophon-mobile {
     clear: both;
-    min-height: 350px;
     margin-bottom: 0;
     position: static;
-    padding: 20% 0;
 }
 
 #colophon .single-colophon {
-    display: table-cell;
+    display: table;
+    text-align: center;
     width: 100%;
+    height: 350px;
+    min-height: 350px;
+    background: #0c0c0c;
+}
+
+#colophon .single-block > * {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .credits {
+    vertical-align: middle;
+    display: table-cell;
     width: 100%;
     margin: 0 auto;
     text-align: center;
@@ -1949,12 +1978,42 @@ a.page-numbers:hover {
         width: 75%;
     }
     
+    .entry-title {
+        line-height: 1.4;
+        font-size: 45px;
+    }
+    
     .entry-subtitle {
         font-size: 16px;
         line-height: 1.75;
         margin: 20px 5% 0;
     }
-
+    
+    .blog .block:first-child, .single .block {
+        padding-top: 22%;
+    }
+    
+    .blog .block:first-child .entry-header, .blog .block .entry-header, .single .entry-header,.archive .entry-header, .search .entry-header {
+    margin: 75px 0 125px;
+    }
+    
+    .archive .block:first-child, .search .block:first-child {
+        padding-top: 80%;
+    }
+    
+    .blog .block-more, .archive .block-more, .search .block-more {
+        bottom: 30px;
+        max-width: 45%;
+    }
+    
+    blockquote h2 {
+        font-size: 18px;
+    }
+    
+    #sidebar-footer {
+        padding-top: 350px;
+    }
+    
     .action-left, .action-right {
         width: 100%;
         text-align: center;
