@@ -1,3 +1,5 @@
+NOT MANTAINED PROJECT
+=====
 Basil
 =====
 
@@ -54,7 +56,7 @@ Upcoming features
 Basil is a full-featured theme already. However, there is always space for improvements!
 
 * Homepage content slider for selected content (tag based or Custom Post Type based)
-* Random backgrounds from [triangligy.js](https://github.com/qrohlf/trianglify) for post/pages without a featured image @qrohlf
+* Random backgrounds from [trianglify.js](https://github.com/qrohlf/trianglify) for post/pages without a featured image @qrohlf
 * Custom Logo selection via the Customizer
 * Custom Color selection via the Customizer
 
@@ -79,4 +81,4 @@ Basil uses [Advanced Custom Fields by Elliot Comdom](http://www.advancedcustomfi
 
 Some templates and function are inspired by the always wonderful themes made by [The WordPress Team](https://wordpress.org/): twentysixteen & twentyfifteen
 
-The default background ( pattern.svg ) was generated with [triangligy.js](https://github.com/qrohlf/trianglify)
+The default background ( pattern.svg ) was generated with [trianglify.js](https://github.com/qrohlf/trianglify)
